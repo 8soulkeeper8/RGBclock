@@ -31,10 +31,11 @@ function rgb() {
     let m = time.getMinutes();
     let s = time.getSeconds();
     let ampm = h >= 12 ? 'PM' : 'AM';
-
+    console.log(ampm);
     // сделал 12 часовой формат и добавил 0 если число меньше 10
     h = h % 12;
     h = h ? h : 12;
+    h = h < 10 ? '0' + h : h;
     m = m < 10 ? '0' + m : m;
     s = s < 10 ? '0' + s : s;
 
@@ -47,15 +48,15 @@ function rgb() {
     color.textContent = colorStr;
 
     // меняем сообщение в зависимости от времени
-    if (h === 1) {
+    if (h === 1 && ampm == 'AM') {
         messageStr = 'Уже час ночи, доделывай дела и спать';
-    } else if (h == 2 || h < 5) {
+    } else if (h == 2 || h < 5 && ampm == 'AM') {
         messageStr = 'Уже ' + h + ' часа ночи, доделывай дела и спать';
-    } else if (h === 5) {
+    } else if (h === 5 && ampm == 'AM') {
         messageStr = '5 утра, спать уже бессмысленно, смирись';
-    } else if (h === 6 || h <= 11) {
+    } else if (h === 6 || h <= 11 && ampm == 'AM') {
         messageStr = 'Уже ' + h + ' утра, пора вставать';
-    } else if (h === 12 || h <= 23) {
+    } else if (h === 12 || h <= 23 && ampm == 'PM') {
         messageStr = 'Сейчас ' + h + ' часов, бодрствуй!';
     } else {
         messageStr = 'Уже ' + h + ' часов, пора ложиться отдыхать zZzZz';
